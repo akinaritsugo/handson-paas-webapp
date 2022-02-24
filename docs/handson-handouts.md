@@ -1,74 +1,49 @@
-# Azure PaaS Handson ~#1 Infra Beginner~
+# Azure PaaS Handson (#1 Infra Beginner)
 
 ## 概要
 
 ### 目的
 
+ハンズオンを通してPaaS利用時の基本的なネットワーク構成およびその実現方法を学びます。
+
+
 ### 対象
+
+以下のような方を対象として想定しています。
+
+* クラウド管理者​
+* クラウドアーキテクト​
+* ネットワークエンジニア​
+* セキュリティ管理者​
+* セキュリティアーキテクト
+
 
 ### 前提条件
 
-* Visual Studio 2019
+* ネットワーク知識
+
 
 ### 目次
 
-  * [Exercise1：ネットワーク作成](#Exercise1：ネットワーク作成)
-  * [Exercise2：SQL Database作成](#Exercise2：SQL-Database作成)
-  * [Exercise3：App Service作成](#Exercise3：App-Service作成)
-  * [Exercise4：Key Vault作成](#Exercise4：Key-Vault作成)
+  1. [Exercise1：ネットワーク作成](#exercise1ネットワーク作成)
+  2. [Exercise2：SQL Database作成](#exercise2sql-database作成)
+  3. [Exercise3：App Service作成](#exercise3app-service作成)
+  4. [Exercise4：Key Vault作成](#exercise4key-vault作成)
 
+  * [事前準備](./handson-prepare.md)
 
----
-
-## 事前準備
-
-1. リソースグループを作成
-
-    * リソースグループ： `handson-lab-rg`
-    * リージョン： `Japan East`
-
-2. 開発仮想マシン作成
-
-3. 開発仮想マシンの環境準備
-
-    * GitHubのソースコードをダウンロード
-
-        https://github.com/akinaritsugo/handson-paas-webapp
-
-        →ダウンロードしたファイルは「 `Documents` 」に配置しておく
-
-    * SQL Server Management Studio のインストール
-
-        https://docs.microsoft.com/ja-jp/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15#available-languages
-
-    * Visual Studio 2019 Community のインストール
-
-        https://visualstudio.microsoft.com/ja/downloads/
-
-          * Workloads
-              * ASP.NET
-              * Azure
-              * Data storage and processing
-          * Language Packs
-              * Japanese
-
-      `Web開発` で一度起動する
-      [Tool]-[Options]を開き、[Environment]-[International Settings]で言語を「日本語」に変更
-
-    * スタートメニューに以下のショートカットを入れておく
-
-        * SQL Server Management Studio (SSMS)
-        * Visual Studio 2022 Community
 
 ---
 
 ## ハンズオン
 
-### 必要リソースの確認
+### 事前準備された環境の確認
 
-以下のリソースについて手元にダウンロードしておきます。
+![](./images/ex00-000-initial.png)
 
-1. ソースコード、データなどの確認
+事前準備された環境には以下のリソースが配置されています。
+
+* ソースコード、データなどの確認
 
       ```
       Documents
@@ -76,6 +51,11 @@
             |- app      Webアプリケーション本体
             `- data     SQL Server へ投入するデータ
       ```
+
+* インストール済みアプリケーション
+    * Visual Studio 2022 Community Edition
+    * SQL Server Management Studio
+
 
 ### Exercise1：ネットワーク作成
 
@@ -171,6 +151,8 @@
 
 ### Exercise2：SQL Database作成
 
+![](./images/ex02-000-create-sql-database.png)
+
 1. ポータル上部の検索窓から `sql` を検索、「SQL データベース」を選択
 
 2. 左上「作成」を選択
@@ -255,6 +237,8 @@
 
 
 ### Exercise3：App Service作成
+
+![](./images/ex03-000-create-appservice.png)
 
 1. App Service プラン 作成
 
@@ -392,6 +376,8 @@
 
 
 ### Exercise4：Key Vault作成
+
+![](./images/ex04-000-create-keyvault.png)
 
 1. マネージドID 作成
 
@@ -603,16 +589,16 @@
 
 
 
-5. 動作確認
+    5. 動作確認
 
-    1. 作成した App Service を開く
+        1. 作成した App Service を開く
 
-    2. [概要]に表示される「URL」を確認
+        2. [概要]に表示される「URL」を確認
 
-    3. インターネットへつながる任意の環境でブラウザを立ち上げ、 App Service で確認したURLへアクセス<br />
-        接続ができていれば「Search」を開いたときに検索結果が表示される。
+        3. インターネットへつながる任意の環境でブラウザを立ち上げ、 App Service で確認したURLへアクセス<br />
+            接続ができていれば「Search」を開いたときに検索結果が表示される。
 
-        ![](./images/ex05-001-test.png)
+            ![](./images/ex05-001-test.png)
 
 
 
