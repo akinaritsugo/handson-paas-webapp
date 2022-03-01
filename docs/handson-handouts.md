@@ -131,23 +131,53 @@
 
     6. [設定]-[受信セキュリティ規則]を開く
     7. [追加]を選択
-    8. 以下の受信規則を追加
+    8. 以下の受信規則（インバウンド）を追加
 
-    |優先度|名前               |ポート|プロトコル|ソース|宛先|アクション|
-    |------|------------------|-----|---------|-----|----|---------|
-    |100   |AllowHttpInBound  |80    |TCP      |Any  |Any |Allow    |
-    |110   |AllowHttpsInBound |443   |TCP      |Any  |Any |Allow    |
+        |優先度|名前               |ポート|プロトコル|ソース|宛先|アクション|
+        |------|------------------|-----|---------|-----|----|---------|
+        |100   |AllowHttpInBound  |80    |TCP      |Any  |Any |Allow    |
+        |110   |AllowHttpsInBound |443   |TCP      |Any  |Any |Allow    |
 
-    9. [設定]-[送信セキュリティ規則]を開く
+<!--
+     9. [設定]-[送信セキュリティ規則]を開く
     10. [追加]を選択
-    11. 以下の送信規則を追加
+    11. 以下の送信規則（アウトバウンド）を追加
 
     |優先度|名前                     |ポート|プロトコル|ソース|宛先|アクション|
     |------|------------------------|-----|---------|-----|----|---------|
     |100   |AllowSQLServerOutBound  |80    |TCP      |Any  |Any |Allow    |
+-->
 
-6. 3~5を繰り返して `data-nsg` と `keyvault-nsg` も作成
+6. 3~5を繰り返して残りのネットワークセキュリティグループも作成
 
+* `data-nsg`
+    * インバウンド
+        （規則なし）
+    * アウトバウンド
+        （規則なし）
+* `keyvault-sub`
+    * インバウンド
+        （規則なし）
+    * アウトバウンド
+        （規則なし）
+* `bastion-nsg`
+    * インバウンド
+
+        |優先度|名前                        |ポート|プロトコル|ソース|宛先|アクション|
+        |------|----------------------------|-----|---------|-----|----|---------|
+        |100   |AllowHttpsInBound           |443   |TCP    |Internet  |Any |Allow    |
+        |110   |AllowGatewayManagerInBound  |443    |TCP  |GatewayManager  |Any |Allow    |
+        |120   |AllowAzureLoadBalancerInBound|443   |TCP   |AzureLoadBalancer  |Any |Allow    |
+        |130   |AllowBastionHostCommunication|8080,5701 |Any  |VirtualNetwork |VirtualNetwork |Allow|
+
+    * アウトバウンド
+
+        |優先度|名前               |ポート|プロトコル|ソース|宛先|アクション|
+        |------|------------------|-----|---------|-----|----|---------|
+        |100   |AllowSshRdpOutBound  |22,3389    |Any      |Any  |VirtualNetwork |Allow    |
+        |110   |AllowAzureCloudOutBound |443   |TCP      |Any  |AzureCloud |Allow    |
+        |120   |AllowBastionCommunication|8080,5701 |Any  |VirtualNetwork |VirtualNetwork |Allow|
+        |130   |AllowGetSessionInformation |80   |Any      |Any  |Internet |Allow    |
 
 ### Exercise2：安全なアクセス
 
