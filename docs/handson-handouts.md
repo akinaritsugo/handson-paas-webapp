@@ -26,9 +26,10 @@
 ### 目次
 
   1. [Exercise1：ネットワーク作成](#exercise1ネットワーク作成)
-  2. [Exercise2：SQL Database作成](#exercise2sql-database作成)
-  3. [Exercise3：App Service作成](#exercise3app-service作成)
-  4. [Exercise4：Key Vault作成](#exercise4key-vault作成)
+  2. [Exercise2：安全なアクセス](#exercise2安全なアクセス)
+  2. [Exercise3：SQL Database作成](#exercise3sql-database作成)
+  3. [Exercise4：App Service作成](#exercise4app-service作成)
+  4. [Exercise5：Key Vault作成](#exercise5key-vault作成)
 
   * [事前準備](./handson-prepare.md)
 
@@ -148,8 +149,135 @@
 6. 3~5を繰り返して `data-nsg` と `keyvault-nsg` も作成
 
 
+### Exercise2：安全なアクセス
 
-### Exercise2：SQL Database作成
+**●Just-In-Time アクセス**
+
+1. Defender for Cloud の有効化
+
+    1. ポータル上部の検索から `defender` を検索、 「Microsoft Defender for Cloud」 を選択
+
+    2. [管理]-[環境設定] を開く
+
+    3. 保護したいサブスクリプションを選択
+
+    4. 「すべて有効にする」を選択
+
+        ![](./images/ex02-001-safe-access.png)
+
+    5. 左上の「保存」を選択
+
+2. Just-In-Time の設定
+
+    1. ポータル上部の検索から `defender` を検索、 「Microsoft Defender for Cloud」 を選択
+
+    2. [クラウドセキュリティ]-[ワークロード保護]を選択
+
+    3. 「Just-In-Time VM アクセス」を選択
+
+    4. 「仮想マシン」の「構成されていません」タブへ移動
+
+    5. `win-vm` を選択して「1台のVMでJITを有効にする」を選択
+
+        ![](./images/ex02-002-safe-access.png)
+
+
+    (参考) Defender for Cloud の一覧に表示されていない場合、以下の手順で個別にVM側から設定することも可能です。
+
+    1. ポータル上部の検索から `vm` を検索、 「Virtual Machines」 を選択
+
+    2. `win-vm` を選択
+
+    3. [設定]-[構成]を開く
+
+    4. 「Just-in-Time を有効にする」を選択
+
+        ![](./images/ex02-003-safe-access.png)
+
+3. Just-In-Time アクセスを利用した接続
+
+    1. ポータル上部の検索から `vm` を検索、 「Virtual Machines」 を選択
+
+    2. `win-vm` を選択
+
+    3. [設定]-[接続]を開く
+
+    4. RDPタブで「接続元IPアドレス」として「自分のIP」を選択して「アクセス権の要求」を選択
+
+        ![](./images/ex02-004-safe-access.png)
+
+    5. 「RDPファイルのダウンロード」を押下してRDPファイルを取得
+
+    6. ダウンロードした RDPファイル を使って仮想マシンへアクセス
+
+        (*) ログインに必要なユーザー名、パスワードは担当者へご確認お願いします。
+
+**●Bastion**
+
+1. Bastion の構築
+
+    1. ポータル上部の検索から `bastion` を検索、 「Bastion」 を選択
+
+    2. 左上「作成」を選択
+
+    3. Bastionの作成
+
+        1. 基本
+
+            * リソースグループ： `handson-lab-rg`
+            * 名前： (任意)
+            * 地域： (リソースグループと同じ)
+            * 仮想ネットワーク： `main-vnet`
+            * サブネット： `AzureBastionSubnet` (サブネット名は固定)
+            * パブリックIP： 新規作成
+
+            ![](./images/ex02-101-safe-access.png)
+
+        2. タグ
+
+            特に設定せず次へ
+
+        3. 詳細設定
+
+            「ネイティブクライアントサポート（プレビュー）」にチェック
+
+            ![](./images/ex02-102-safe-access.png)
+
+        4. 確認および作成
+
+            作成内容を確認して「作成」
+
+2. Bastion を利用した接続
+
+    1. ポータル上部の検索から `vm` を検索、 「Virtual Machines」 を選択
+
+    2. `win-vm` を選択
+
+    3. [操作]-[Bastion]を開く
+
+    4. 「新しいウィンドウで開く」にチェックを入れ、「ユーザー名」「パスワード」を入力して「接続」を選択
+    
+        (*) ポップアップブロックされた場合、「許可」して再度実行する
+
+        ![](./images/ex02-103-safe-access.png)
+
+
+    (参考) ローカルに az コマンドがインストールされている場合、以下のコマンド(PowerShell)でネイティブログインが可能。
+
+    ```
+    $SUBSCRIPTION_ID="<YOUR_SUBSCRIPTION_ID>"
+    $RESOUCE_GROUP_NAME="handson-lab-rg"
+    $BASTION_NAME="<YOUR_BASTION_NAME>"
+    $VM_NAME="win-vm"
+    $VM_ID=/subscriptions/$SUBSCRIPTION_ID/resourceGroups/$RESOUCE_GROUP_NAME/providers/Microsoft.Compute/virtualMachines/$VM_NAME
+
+    az login
+    az account set -s $SUBSCRIPTION_ID
+    az network bastion rdp --name "$BASTION_NAME" --resource-group "$RESOUCR_GROUP_NAME" --target-resource-id "$VM_ID"
+    ```
+
+
+### Exercise3：SQL Database作成
 
 ![](./images/ex02-000-create-sql-database.png)
 
@@ -236,7 +364,7 @@
         ```
 
 
-### Exercise3：App Service作成
+### Exercise4：App Service作成
 
 ![](./images/ex03-000-create-appservice.png)
 
@@ -375,7 +503,7 @@
         ![](./images/ex03-202-create-appservice.png)
 
 
-### Exercise4：Key Vault作成
+### Exercise5：Key Vault作成
 
 ![](./images/ex04-000-create-keyvault.png)
 
