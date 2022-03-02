@@ -309,7 +309,7 @@
 
 ### Exercise3：SQL Database作成
 
-![](./images/ex02-000-create-sql-database.png)
+![](./images/ex03-000-create-sql-database.png)
 
 1. ポータル上部の検索窓から `sql` を検索、「SQL データベース」を選択
 
@@ -327,9 +327,9 @@
             * 場所： 東日本（リソースグループの設定にあわせる）
             * 認証： "SQL 認証を使用する" にして ID/PASSWORD を指定
 
-            ![](./images/ex02-002-create-sql-database.png)
+            ![](./images/ex03-002-create-sql-database.png)
 
-        ![](./images/ex02-003-create-sql-database.png)
+        ![](./images/ex03-003-create-sql-database.png)
 
     2. ネットワーク
 
@@ -341,7 +341,7 @@
             * ネットワーク： `data-sub` (SQL Database 用のサブネットを指定)
             * プライベートDNS統合： DNS統合する
 
-            ![](./images/ex02-004-create-sql-database.png)
+            ![](./images/ex03-004-create-sql-database.png)
 
     3. セキュリティ
 
@@ -361,7 +361,7 @@
     2. [セキュリティ]-[ファイアウォールと仮想ネットワーク]を開く
     3. 「パブリック ネットワークアクセスの拒否」を選択して「保存」
 
-        ![](./images/ex02-005-create-sql-database.png)
+        ![](./images/ex03-005-create-sql-database.png)
 
 
 5. SQLデータベースへデータ投入
@@ -396,7 +396,7 @@
 
 ### Exercise4：App Service作成
 
-![](./images/ex03-000-create-appservice.png)
+![](./images/ex04-000-create-appservice.png)
 
 1. App Service プラン 作成
 
@@ -405,7 +405,7 @@
     * 地域：東日本（リソースグループと同じリージョンを選択）
     * 価格レベル： Standard S1 （Private Endpoint ）
 
-    ![](./images/ex03-001-create-appservice.png)
+    ![](./images/ex04-001-create-appservice.png)
 
 
 2. App Service 作成
@@ -419,19 +419,19 @@
         * 地域（リージョン）： 東日本（リソースグループとあわせる）
         * App Service プラン： （前手順で作成したものを指定）
 
-        ![](./images/ex03-002-create-appservice.png)
+        ![](./images/ex04-002-create-appservice.png)
 
     2. デプロイ
 
         * 継続的なデプロイ： 無効化
 
-        ![](./images/ex03-003-create-appservice.png)
+        ![](./images/ex04-003-create-appservice.png)
 
     3. 監視
 
         * Application Insights を有効にする： いいえ
 
-        ![](./images/ex03-004-create-appservice.png)
+        ![](./images/ex04-004-create-appservice.png)
 
     4. 確認および作成
 
@@ -449,7 +449,7 @@
 
     5. 作成済みの `business-sub` を選択して「OK」
 
-        ![](./images/ex03-005-create-appservice.png)
+        ![](./images/ex04-005-create-appservice.png)
 
 
 4. アプリケーションのリリース
@@ -461,27 +461,27 @@
 
     3. ソリューションエクスプローラーでプロジェクト名を右クリック、「発行」を選択
 
-        ![](./images/ex03-101-create-appservice.png)
+        ![](./images/ex04-101-create-appservice.png)
 
     4. ターゲットは「Azure」を選択
 
-        ![](./images/ex03-102-create-appservice.png)
+        ![](./images/ex04-102-create-appservice.png)
 
     5. 特定のターゲットは「Azure App Service (Window)」を選択
 
-        ![](./images/ex03-103-create-appservice.png)
+        ![](./images/ex04-103-create-appservice.png)
 
     6. サインインを行う
 
-        ![](./images/ex03-104-create-appservice.png)
+        ![](./images/ex04-104-create-appservice.png)
 
     7. リリース先を選択
 
-        ![](./images/ex03-105-create-appservice.png)
+        ![](./images/ex04-105-create-appservice.png)
 
     8. 「発行」を選択
 
-        ![](./images/ex03-106-create-appservice.png)
+        ![](./images/ex04-106-create-appservice.png)
 
     9. 自動でブラウザが立ち上がるのでリリースされていることをを確認
 
@@ -530,12 +530,12 @@
     3. インターネットへつながる任意の環境でブラウザを立ち上げ、 App Service で確認したURLへアクセス<br />
         接続ができていれば「Search」を開いたときに検索結果が表示される。
 
-        ![](./images/ex03-202-create-appservice.png)
+        ![](./images/ex04-202-create-appservice.png)
 
 
 ### Exercise5：Key Vault作成
 
-![](./images/ex04-000-create-keyvault.png)
+![](./images/ex05-000-create-keyvault.png)
 
 1. マネージドID 作成
 
@@ -551,7 +551,7 @@
             * 地域： (リソースグループと同じ)
             * 名前： (任意)
 
-            ![](./images/ex04-001-create-keyvault.png)
+            ![](./images/ex05-001-create-keyvault.png)
 
         2. 確認および作成
 
@@ -572,7 +572,7 @@
             * Key Vault 名： (任意)
             * 地域（リージョン）： (リソースグループと同じ)
 
-            ![](./images/ex04-101-create-keyvault.png)
+            ![](./images/ex05-101-create-keyvault.png)
 
         2. アクセスポリシー、ネットワークは後から設定するのでスキップ
 
@@ -595,7 +595,7 @@
             * 名前： (任意)
             * 値： (App Service に登録した ConnectionString を設定)
 
-            ![](./images/ex04-301-create-keyvault.png)
+            ![](./images/ex05-301-create-keyvault.png)
 
     2. アクセスポリシー
 
@@ -614,7 +614,7 @@
             |証明書のアクセス許可       | (なし) |
             |プリシンパルの選択         | (作成したマネージドIDを選択) |
 
-            ![](./images/ex04-302-create-keyvault.png)
+            ![](./images/ex05-302-create-keyvault.png)
         
         5. 「保存」を選択（ **保存し忘れ注意** ）
 
@@ -636,7 +636,7 @@
                 * 名前： (任意)
                 * 地域： (リソースグループと同じ)
 
-                ![](./images/ex04-303-create-keyvault.png)
+                ![](./images/ex05-303-create-keyvault.png)
 
             2. リソース
 
@@ -644,7 +644,7 @@
                 * リソース： (作成した KeyVault の名前)
                 * 対象サブリソース： `vaults`
 
-                ![](./images/ex04-304-create-keyvault.png)
+                ![](./images/ex05-304-create-keyvault.png)
             
             3. 仮想ネットワーク
 
@@ -653,7 +653,7 @@
                 * プライベートIP構成： IPアドレスを動的に割り当てる
                 * プライベートDNS統合： プライベートDNSゾーンと統合する「はい」
 
-                ![](./images/ex04-305-create-keyvault.png)
+                ![](./images/ex05-305-create-keyvault.png)
             
             4. 確認と作成
 
@@ -676,7 +676,7 @@
                 * dev-vm-sub (開発VMの存在するサブネット)
                 * business-sub (App Service のVNet統合をしたサブネット)
 
-                ![](./images/ex04-306-create-keyvault.png)
+                ![](./images/ex05-306-create-keyvault.png)
 
 
 
@@ -694,7 +694,7 @@
 
         5. 作成した「マネージドID」を選択、「追加」を選択
 
-            ![](./images/ex04-401-create-keyvault.png)
+            ![](./images/ex05-401-create-keyvault.png)
 
         6. Cloudシェルを起動して以下のコマンドを実行<br />
             KeyVaultを参照するときに使うIDがマネージドIDになるよう修正
@@ -725,7 +725,7 @@
             |値  | `@Microsoft.KeyVault(SecretUri=<SECRET_URI>)` |
             |種類| `SQLServer` |
 
-            ![](./images/ex04-402-create-keyvault.png)
+            ![](./images/ex05-402-create-keyvault.png)
 
             > note
             > 
@@ -741,7 +741,7 @@
 
         6. 正しく接続できれば「ソース」に「キーコンテナーの参照」が表示される
 
-            ![](./images/ex04-403-create-keyvault.png)
+            ![](./images/ex05-403-create-keyvault.png)
 
 
 
@@ -756,7 +756,7 @@
         3. インターネットへつながる任意の環境でブラウザを立ち上げ、 App Service で確認したURLへアクセス<br />
             接続ができていれば「Search」を開いたときに検索結果が表示される。
 
-            ![](./images/ex05-001-test.png)
+            ![](./images/ex05-501-test.png)
 
 
 
