@@ -181,6 +181,8 @@
 
 ### Exercise2：安全なアクセス
 
+![](./images/ex02-000-safe-access.png)
+
 **●Just-In-Time アクセス**
 
 1. Defender for Cloud の有効化
